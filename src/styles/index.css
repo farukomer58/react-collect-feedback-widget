@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .feedback-widget-backdrop {
+    @apply fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300;
+  }
+
+  .feedback-widget-modal {
+    @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+  }
+
+  .feedback-widget-modal-content {
+    @apply bg-white rounded-lg shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300;
+  }
+
+  .feedback-widget-icon {
+    @apply fixed z-30 cursor-pointer transition-transform duration-200 hover:scale-110;
+  }
+
+  .feedback-widget-button {
+    @apply px-4 py-2 rounded-md font-medium transition-colors duration-200;
+  }
+
+  .feedback-widget-button-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed;
+  }
+
+  .feedback-widget-button-secondary {
+    @apply bg-gray-200 text-gray-800 hover:bg-gray-300;
+  }
+
+  .feedback-widget-input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+  }
+
+  .feedback-widget-textarea {
+    @apply w-full px-3 py-2 min-h-[100px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-y;
+  }
+
+  .feedback-widget-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+
+  .feedback-widget-star-rating {
+    @apply flex gap-1;
+  }
+
+  .feedback-widget-star {
+    @apply cursor-pointer text-2xl transition-colors duration-150;
+  }
+
+  .feedback-widget-star-filled {
+    @apply text-yellow-400;
+  }
+
+  .feedback-widget-star-empty {
+    @apply text-gray-300;
+  }
+}
+
