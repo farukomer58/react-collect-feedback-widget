@@ -1,5 +1,9 @@
 # React Feedback Widget
 
+[![npm version](https://img.shields.io/npm/v/react-collect-feedback-widget.svg)](https://www.npmjs.com/package/react-collect-feedback-widget)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
+
 A fully customizable React feedback widget component with a floating icon and modal form. Collect user feedback including ratings, text comments, email, name, and categories.
 
 ## Features
@@ -349,11 +353,101 @@ import { FeedbackWidget, FeedbackData, FeedbackWidgetProps } from 'react-collect
 - Safari (latest)
 - Edge (latest)
 
-## License
+## Development
 
-MIT
+### Prerequisites
+
+- Node.js 16+ and npm 8+
+
+### Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/farukomer58/react-collect-feedback-widget.git
+cd react-collect-feedback-widget
+
+# Install dependencies
+npm install
+
+# Build the package
+npm run build
+
+# Run type checking
+npm run type-check
+
+# Watch mode for development
+npm run dev
+```
+
+### Project Structure
+
+```
+src/
+  components/     # React components
+  hooks/          # Custom React hooks
+  utils/          # Utility functions
+  types.ts        # TypeScript definitions
+  styles/         # CSS styles
+  index.ts        # Main entry point
+```
+
+## Troubleshooting
+
+### Styles not appearing
+
+Make sure you've imported the CSS file:
+
+```tsx
+import 'react-collect-feedback-widget/styles.css';
+```
+
+### Modal not opening
+
+- Check that the `show` prop is not set to `false`
+- Verify that there are no z-index conflicts with other elements
+- Ensure React and React-DOM are installed as peer dependencies
+
+### Form validation errors
+
+The widget includes built-in validation:
+- Rating must be between 1-5 if the rating field is enabled
+- Text feedback must be at least 3 characters if the text field is enabled
+- Email must be valid format if provided
+- Category must be selected if the category field is enabled
+
+### TypeScript errors
+
+Ensure you're using TypeScript 4.5+ and have `@types/react` and `@types/react-dom` installed.
+
+## FAQ
+
+**Q: Can I use this without Tailwind CSS?**  
+A: The component uses Tailwind CSS classes, but the compiled CSS is included in the package. You don't need Tailwind in your project.
+
+**Q: How do I customize the appearance?**  
+A: Use the `theme` prop for colors and `customStyles` prop for additional CSS classes.
+
+**Q: Can I submit feedback to multiple endpoints?**  
+A: Use the `onSubmit` callback to handle multiple submissions or custom logic.
+
+**Q: Is the widget accessible?**  
+A: Yes! The widget includes ARIA labels, keyboard navigation, and focus management for screen readers.
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for a list of changes and version history.
 

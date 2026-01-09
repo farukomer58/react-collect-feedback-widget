@@ -1,24 +1,37 @@
-import { useFeedback } from '../hooks/useFeedback';
 import {
-  FeedbackData,
-  FeedbackFieldsConfig,
-  FeedbackLabels,
-  FeedbackCategory,
-  FeedbackTheme,
+  type FeedbackData,
+  type FeedbackFieldsConfig,
+  type FeedbackLabels,
+  type FeedbackCategory,
+  type FeedbackTheme,
 } from '../types';
+import { StarRating } from './StarRating';
+import { DEFAULT_ERROR_BG_COLOR, DEFAULT_ERROR_TEXT_COLOR } from '../utils/constants';
 
 interface FeedbackFormProps {
+  /** Current form data values */
   formData: FeedbackData;
-  updateField: (field: keyof FeedbackData, value: any) => void;
+  /** Callback to update a form field */
+  updateField: (field: keyof FeedbackData, value: string | number | undefined) => void;
+  /** Callback when form is submitted */
   onSubmit: () => void;
+  /** Callback when form is cancelled */
   onCancel: () => void;
+  /** Whether the form is currently submitting */
   isSubmitting: boolean;
+  /** Error message to display, if any */
   error: string | null;
+  /** Whether submission was successful */
   success: boolean;
+  /** Field configuration */
   fields?: FeedbackFieldsConfig;
+  /** Custom labels for form elements */
   labels?: FeedbackLabels;
+  /** Available categories for selection */
   categories?: FeedbackCategory[];
+  /** Theme configuration */
   theme?: FeedbackTheme;
+  /** Custom CSS classes */
   customStyles?: {
     form?: string;
     button?: {
@@ -28,6 +41,13 @@ interface FeedbackFormProps {
   };
 }
 
+/**
+ * FeedbackForm component renders the feedback collection form.
+ * Supports rating, text, email, name, and category fields with full customization.
+ * 
+ * @param props - FeedbackForm component props
+ * @returns JSX element representing the feedback form
+ */
 export function FeedbackForm({
   formData,
   updateField,
@@ -71,36 +91,6 @@ export function FeedbackForm({
     ...labels,
   };
 
-  const renderStarRating = () => {
-    const rating = formData.rating || 0;
-    const stars = [];
-
-    for (let i = 1; i <= 5; i++) {
-      stars.push(
-        <button
-          key={i}
-          type="button"
-          onClick={() => updateField('rating', i)}
-          className={`feedback-widget-star ${
-            i <= rating
-              ? 'feedback-widget-star-filled'
-              : 'feedback-widget-star-empty'
-          }`}
-          style={
-            theme?.primary && i <= rating
-              ? { color: theme.primary }
-              : undefined
-          }
-          disabled={isSubmitting}
-        >
-          ★
-        </button>
-      );
-    }
-
-    return <div className="feedback-widget-star-rating">{stars}</div>;
-  };
-
   if (success) {
     return (
       <div className="p-6 text-center">
@@ -142,18 +132,28 @@ export function FeedbackForm({
         e.preventDefault();
         onSubmit();
       }}
+      aria-labelledby="feedback-form-title"
+      noValidate
     >
       <h2
         className="text-2xl font-bold mb-6"
         style={theme?.text ? { color: theme.text } : undefined}
+        id="feedback-form-title"
       >
         {defaultLabels.title}
       </h2>
 
       {defaultFields.rating && (
         <div className="mb-4">
-          <label className="feedback-widget-label">{defaultLabels.rating}</label>
-          {renderStarRating()}
+          <label className="feedback-widget-label" htmlFor="rating">
+            {defaultLabels.rating}
+          </label>
+          <StarRating
+            rating={formData.rating || 0}
+            onRatingChange={(rating) => updateField('rating', rating)}
+            theme={theme}
+            disabled={isSubmitting}
+          />
         </div>
       )}
 
@@ -235,10 +235,15 @@ export function FeedbackForm({
       {error && (
         <div
           className="mb-4 p-3 rounded-md text-sm"
+          role="alert"
+          aria-live="polite"
           style={
             theme?.error
               ? { backgroundColor: `${theme.error}20`, color: theme.error }
-              : { backgroundColor: '#fee2e2', color: '#dc2626' }
+              : {
+                  backgroundColor: DEFAULT_ERROR_BG_COLOR,
+                  color: DEFAULT_ERROR_TEXT_COLOR,
+                }
           }
         >
           {error || defaultLabels.error}

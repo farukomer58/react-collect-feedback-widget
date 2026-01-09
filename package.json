@@ -1,6 +1,6 @@
 {
   "name": "react-collect-feedback-widget",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A fully customizable React feedback widget component with floating icon and modal form",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -33,8 +33,20 @@
     "rating",
     "modal"
   ],
-  "author": "",
+  "author": "Omer Faruk Citik of.c.58@hotmail.com",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/farukomer58/react-collect-feedback-widget.git"
+  },
+  "bugs": {
+    "url": "https://github.com/farukomer58/react-collect-feedback-widget/issues"
+  },
+  "homepage": "https://github.com/farukomer58/react-collect-feedback-widget#readme",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0",
     "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
@@ -51,4 +63,3 @@
     "typescript": "~5.9.3"
   }
 }
-
